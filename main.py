@@ -645,3 +645,30 @@ def findQuartiles():
         q3 = round(st.median(myList[middle:]))
     return str(q1) + "\n" + str(q2) + "\n" + str(q3)
 #print(findQuartiles())
+
+def interquartileRange():
+    length = input()
+    elements = list(map(int,input().split(" ")))
+    frequencies = list(map(int,input().split(" ")))
+    dataset = [[x[0]] * x[1] for x in zip(elements,frequencies)]
+    dataset = [j for i in dataset for j in i]
+    dataset.sort()
+    datasetLength = len(dataset)
+    middle = datasetLength // 2
+    q1 = round(st.median(dataset[:middle]),1)
+    if datasetLength % 2 is not 0:
+        q3 = round(st.median(dataset[middle+1:]),1)
+    else:
+        q3 = round(st.median(dataset[middle:]),1)
+    return float(q3 - q1)
+#print(interquartileRange())
+
+def standardDeviation():
+    length = float(input())
+    myList = list(map(int, input().split(" ")))
+    mean = sum(myList) / length
+    distance = sum([(x - mean) ** 2 for x in myList])
+    return round((distance / length) ** 0.5, 1)
+#print(standardDeviation())
+
+
