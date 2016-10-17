@@ -557,14 +557,13 @@ def contiguousSubarray(myList, mySum, window = 1):
             return contiguousSubarray(myList, mySum, window + 1)
     return False
 
-print(contiguousSubarray([1,3,5,18],26))
+#print(contiguousSubarray([1,3,5,18],26))
 
 def gcd(a,b):
     while b:
         a, b = b, a % b
     return a
-print(gcd(8,20))
-
+#print(gcd(8,20))
 
 # https://leetcode.com/problems/regular-expression-matching/
 def isMatch(myString,pattern):
@@ -631,7 +630,7 @@ def meanMedianMode():
     return str(mean) + "\n" + str(median) + "\n" + str(mode)
 #print(meanMedianMode())
 
-import statistics as st
+#import statistics as st
 def findQuartiles():
     length = int(input())
     myList = list(map(int,input().split(" ")))
@@ -670,5 +669,27 @@ def standardDeviation():
     distance = sum([(x - mean) ** 2 for x in myList])
     return round((distance / length) ** 0.5, 1)
 #print(standardDeviation())
+
+def factorialCalc(n):
+    if n is 0:
+        return 1
+    else:
+        return n*factorialCalc(n-1)
+
+def calcCombinations(n,x):
+    return factorialCalc(n) / (factorialCalc(x) * factorialCalc(n-x))
+
+def binomialDistribution(x,n,p):
+    return calcCombinations(n,x) * p**x * (1-p)**(n-x)
+
+def getOdds(x,y):
+    return (x / y) / (1 + (x / y))
+def russianPopulation(n,x):
+    totalOdds = 0
+    while x <= n:
+        totalOdds += binomialDistribution(x,n,getOdds(1.09, 1))
+        x += 1
+    return round(totalOdds,3)
+print(russianPopulation(6,3))
 
 
