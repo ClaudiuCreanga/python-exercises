@@ -676,20 +676,57 @@ def factorialCalc(n):
     else:
         return n*factorialCalc(n-1)
 
-def calcCombinations(n,x):
+def calcCombinations(n, x):
     return factorialCalc(n) / (factorialCalc(x) * factorialCalc(n-x))
 
-def binomialDistribution(x,n,p):
-    return calcCombinations(n,x) * p**x * (1-p)**(n-x)
+
+def binomialDistribution(x, n, p):
+    return calcCombinations(n, x) * p**x * (1-p)**(n-x)
+
 
 def getOdds(x,y):
     return (x / y) / (1 + (x / y))
-def russianPopulation(n,x):
+
+
+def russianPopulation(n, x):
     totalOdds = 0
     while x <= n:
-        totalOdds += binomialDistribution(x,n,getOdds(1.09, 1))
+        totalOdds += binomialDistribution(x, n, getOdds(1.09, 1))
         x += 1
-    return round(totalOdds,3)
-print(russianPopulation(6,3))
+    return round(totalOdds, 3)
+#print(russianPopulation(6, 3))
+
+def pistonsManufacturer(n, x):
+    totalOddsAtLeast2Rejects = 0
+    while x <= n:
+        totalOddsAtLeast2Rejects += binomialDistribution(x, n, 0.12)
+        x += 1
+    atLeastTwoRejects = round(totalOddsAtLeast2Rejects, 3)
+    totalOddsNoMoreThan2Rejects = 0
+    i = 0
+    while i <= 2:
+        totalOddsNoMoreThan2Rejects += binomialDistribution(i, n, 0.12)
+        i += 1
+    noMoreThan2Rejects = round(totalOddsNoMoreThan2Rejects, 3)
+    return str(noMoreThan2Rejects) + "\n" + str(atLeastTwoRejects)
+
+#print(pistonsManufacturer(10, 2))
+
+def geometricalDistribution(n, p):
+    return (1 - p)**(n - 1) * p
+
+def geometricDistributionOne():
+    defectiveProduct = [1, 3]
+    inspection = 5
+    return round(geometricalDistribution(inspection, defectiveProduct[0] / defectiveProduct[1]), 3)
+#print(geometricDistributionOne())
+
+def geometricDistributionTwo():
+    defectiveProduct = list(map(int, input().split(" ")))  # "1 3"
+    defectiveProductPercentage = defectiveProduct[0] / float(defectiveProduct[1])
+    return round(sum([geometricalDistribution(x, defectiveProductPercentage) for x in range(1, int(input()) + 1)]), 3)  # "5"
+print(geometricDistributionTwo())
+
+
 
 
