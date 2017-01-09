@@ -774,14 +774,11 @@ def factorialCalc(n):
 def calcCombinations(n, x):
     return factorialCalc(n) / (factorialCalc(x) * factorialCalc(n - x))
 
-
 def binomialDistribution(x, n, p):
     return calcCombinations(n, x) * p ** x * (1 - p) ** (n - x)
 
-
 def getOdds(x, y):
     return (x / y) / (1 + (x / y))
-
 
 def russianPopulation(n, x):
     totalOdds = 0
@@ -789,8 +786,6 @@ def russianPopulation(n, x):
         totalOdds += binomialDistribution(x, n, getOdds(1.09, 1))
         x += 1
     return round(totalOdds, 3)
-
-
 # print(russianPopulation(6, 3))
 
 def pistonsManufacturer(n, x):
@@ -806,20 +801,15 @@ def pistonsManufacturer(n, x):
         i += 1
     noMoreThan2Rejects = round(totalOddsNoMoreThan2Rejects, 3)
     return str(noMoreThan2Rejects) + "\n" + str(atLeastTwoRejects)
-
-
 # print(pistonsManufacturer(10, 2))
 
 def geometricalDistribution(n, p):
     return (1 - p) ** (n - 1) * p
 
-
 def geometricDistributionOne():
     defectiveProduct = [1, 3]
     inspection = 5
     return round(geometricalDistribution(inspection, defectiveProduct[0] / defectiveProduct[1]), 3)
-
-
 # print(geometricDistributionOne())
 
 def geometricDistributionTwo():
@@ -827,11 +817,17 @@ def geometricDistributionTwo():
     defectiveProductPercentage = defectiveProduct[0] / float(defectiveProduct[1])
     return round(sum([geometricalDistribution(x, defectiveProductPercentage) for x in range(1, int(input()) + 1)]),
                  3)  # "5"
-print(geometricDistributionTwo())
+# print(geometricDistributionTwo())
 
 import math
 def poissonDistribution(lam, k):
     return round((lam**k * math.exp(-lam)) / math.factorial(k),3) # lambda is reserved in python
-print(poissonDistribution(2.5, 5))
+#print(poissonDistribution(2.5, 5))
 
 
+def poissonDistributionTwo(X,Y):
+    dailyCostA = 160 + 40*(X+X**2)
+    dailyCostB = 128 + 40*(Y+Y**2)
+    return [round(dailyCostA,3),round(dailyCostB,3)]
+print(poissonDistributionTwo(0.88,1.55)[0])
+print(poissonDistributionTwo(0.88,1.55)[1])
