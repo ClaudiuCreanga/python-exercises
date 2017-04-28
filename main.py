@@ -829,5 +829,5 @@ def poissonDistributionTwo(X,Y):
     dailyCostA = 160 + 40*(X+X**2)
     dailyCostB = 128 + 40*(Y+Y**2)
     return [round(dailyCostA,3),round(dailyCostB,3)]
-print(poissonDistributionTwo(0.88,1.55)[0])
-print(poissonDistributionTwo(0.88,1.55)[1])
+#print(poissonDistributionTwo(0.88,1.55)[0])
+#print(poissonDistributionTwo(0.88,1.55)[1])
